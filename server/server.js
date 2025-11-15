@@ -12,14 +12,17 @@ const PORT = process.env.PORT || 3000;
 // Database connection
 await connectDB();
 
-app.use(express.json());
+// CORS FIX (Put ABOVE express.json)
 app.use(
   cors({
-    origin: ["https://resume-prime.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: "https://resume-prime.vercel.app",
+    methods: "GET,POST,PUT,DELETE",
+    allowedHeaders: "Content-Type,Authorization",
     credentials: true,
   })
 );
+
+app.use(express.json());
 
 app.get("/", (req, res) => res.send("Server is live..."));
 app.use("/api/users", userRouter);
