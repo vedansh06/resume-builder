@@ -9,20 +9,19 @@ import aiRouter from "./routes/aiRoutes.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Database connection
-await connectDB();
-
-// CORS FIX (Put ABOVE express.json)
 app.use(
   cors({
     origin: "https://resume-prime.vercel.app",
-    methods: "GET,POST,PUT,DELETE",
-    allowedHeaders: "Content-Type,Authorization",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
 app.use(express.json());
+
+// Database connection
+await connectDB();
 
 app.get("/", (req, res) => res.send("Server is live..."));
 app.use("/api/users", userRouter);
