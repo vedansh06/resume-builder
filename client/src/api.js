@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const api = axios.create({
+export const API = axios.create({
   baseURL: "https://resume-builder-1-km2k.onrender.com",
 });
-
-export default api;
